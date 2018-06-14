@@ -139,9 +139,9 @@ class Likeopotomus {
             return false;
         }
 
-        // Only render tag if defined 'type' is allowed
+        // Only render tag if 'item_type' and 'item_id' are defined, and 'type' is allowed
         $params = $this->get_params();
-        if (!in_array($params['type'], $this->allowed_types)) {
+        if (!$params['item_type'] || !$params['item_id'] || !in_array($params['type'], $this->allowed_types)) {
             return false;
         }
 
