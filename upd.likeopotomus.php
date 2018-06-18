@@ -4,6 +4,12 @@ class Likeopotomus_upd {
 
     var $version = '2.0.0';
 
+    /**
+     * Installs Likeopotomus module, adds 'init' to ExpressionEngine's actions,
+     * and creates new database table
+     *
+     * @return bool
+     */
     function install()
     {
         $data = array(
@@ -44,6 +50,12 @@ class Likeopotomus_upd {
         return true;
     }
 
+    /**
+     * Upgrades Likeoptomus module to current version
+     *
+     * @param string $current
+     * @return bool
+     */
     function update($current = '')
     {
         if (version_compare($current, '2.0.0', '='))
@@ -59,6 +71,11 @@ class Likeopotomus_upd {
         return TRUE;
     }
 
+    /**
+     * Uninstalls Likeopotomus module
+     *
+     * @return bool
+     */
     function uninstall()
     {
         ee()->db->where('module_name', 'Likeopotomus');

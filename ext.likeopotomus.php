@@ -16,6 +16,11 @@ class Likeopotomus_ext {
 
     protected $member_id = null;
 
+    /**
+     * Likeopotomus_ext constructor.
+     *
+     * @param string $settings
+     */
     function __construct($settings = '')
     {
         $this->settings = $settings;
@@ -23,6 +28,9 @@ class Likeopotomus_ext {
         $this->member_id = ee()->session->userdata('member_id');
     }
 
+    /**
+     * Installs the Likeopotomus extension
+     */
     function activate_extension()
     {
         $this->settings = array();
@@ -44,6 +52,12 @@ class Likeopotomus_ext {
         }
     }
 
+    /**
+     * Updates Likeopotomus extension
+     *
+     * @param string $current
+     * @return bool
+     */
     function update_extension($current = '')
     {
         if ($current == '' OR $current == $this->version)
@@ -51,9 +65,9 @@ class Likeopotomus_ext {
             return FALSE;
         }
 
-        if ($current < '1.0.0')
+        if ($current < '2.0.0')
         {
-            // Update to version 1.0.0
+            // Update to version 2.0.0
         }
 
         ee()->db->where('class', __CLASS__);
@@ -63,12 +77,23 @@ class Likeopotomus_ext {
         );
     }
 
+    /**
+     * Uninstalls Likeopotomus extension
+     */
     function disable_extension()
     {
         ee()->db->where('class', __CLASS__);
         ee()->db->delete('extensions');
     }
 
+    /**
+     * Adds the {qstring} and {is_saved} variable to the results of
+     * the {exp:channel:entries} tag pair in templates.
+     *
+     * @param $data
+     * @param $query_result
+     * @return mixed
+     */
     function update_results($data, $query_result)
     {
         if (!$params = $this->validate()) {
@@ -109,10 +134,12 @@ class Likeopotomus_ext {
     /**
      * Validate the extension should run
      *
-     * @return bool
+     * @return array|bool
      */
     protected function validate()
     {
+        $data = array();
+
         // Verify we have a logged in member
         if (!$data['member_id'] = $this->member_id) {
             return false;
@@ -131,6 +158,13 @@ class Likeopotomus_ext {
         return $data;
     }
 
+    /**
+     * Retrieves a list of 'item_id's from the likeopotomus table
+     *
+     * @param $params
+     * @param $item_ids
+     * @return mixed
+     */
     protected function get($params, $item_ids)
     {
         $results = ee()->db->select('COUNT(item_id), item_id')
