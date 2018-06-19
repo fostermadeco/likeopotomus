@@ -4,7 +4,7 @@ $lang = array(
     "likeopotomus_module_name" => "Likeopotomus",
     "likeopotomus_module_description" => "Provides bookmarking & liking support",
 
-    // For stuff
+    // Module's tag function default add / delete text
     "add" => "Add",
     "delete" => "Delete"
 );

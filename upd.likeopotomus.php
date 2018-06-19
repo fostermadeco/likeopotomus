@@ -29,11 +29,11 @@ class Likeopotomus_upd {
         ee()->db->insert('actions', $actions);
 
         $fields = array(
-            'id'			=> array('type' => 'int', 'constraint' => '10', 'unsigned' => true, 'auto_increment' => true),
-            'type'			=> array('type' => 'varchar', 'constraint' => '16', 'null' => false),
-            'item_type'		=> array('type' => 'varchar', 'constraint' => '16', 'null' => false),
-            'item_id'		=> array('type' => 'int', 'constraint' => '10', 'null' => false),
-            'member_id'		=> array('type' => 'int', 'constraint' => '10', 'null' => false),
+            'id'            => array('type' => 'int', 'constraint' => '10', 'unsigned' => true, 'auto_increment' => true),
+            'type'          => array('type' => 'varchar', 'constraint' => '16', 'null' => false),
+            'item_type'     => array('type' => 'varchar', 'constraint' => '16', 'null' => false),
+            'item_id'       => array('type' => 'int', 'constraint' => '10', 'null' => false),
+            'member_id'     => array('type' => 'int', 'constraint' => '10', 'null' => false),
         );
 
         // Create custom table
@@ -58,13 +58,11 @@ class Likeopotomus_upd {
      */
     function update($current = '')
     {
-        if (version_compare($current, '2.0.0', '='))
-        {
+        if (version_compare($current, '2.0.0', '=')) {
             return FALSE;
         }
 
-        if (version_compare($current, '2.0.0', '<'))
-        {
+        if (version_compare($current, '2.0.0', '<')) {
             // todo: Update code goes here
         }
 

@@ -109,6 +109,7 @@ class Likeopotomus {
         if (!$this->member_id) {
             return false;
         }
+
         $params = $this->get_params();
         $params['member_id'] = $this->member_id;
         $params = array_filter($params);

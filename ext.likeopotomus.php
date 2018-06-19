@@ -60,20 +60,18 @@ class Likeopotomus_ext {
      */
     function update_extension($current = '')
     {
-        if ($current == '' OR $current == $this->version)
-        {
+        if ($current == '' OR $current == $this->version) {
             return FALSE;
         }
 
-        if ($current < '2.0.0')
-        {
+        if ($current < '2.0.0') {
             // Update to version 2.0.0
         }
 
         ee()->db->where('class', __CLASS__);
         ee()->db->update(
-                    'extensions',
-                    array('version' => $this->version)
+            'extensions',
+            array('version' => $this->version)
         );
     }
 

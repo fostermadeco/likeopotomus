@@ -8,9 +8,7 @@ class Likeopotomus_mcp {
     {
         ee()->load->helper('form');
 
-        $vars = array(
-            'settings' => $this->get_settings(),
-        );
+        $vars = array('settings' => $this->get_settings());
 
         return ee('View')->make('likeopotomus:index')->render($vars);
     }
