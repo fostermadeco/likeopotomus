@@ -147,10 +147,10 @@ class Likeopotomus {
 
         if ($this->check($params)) {
             $params['action'] = 'delete';
-            $text = ee()->TMPL->fetch_param('delete_text') ?: 'delete';
+            $text = ee()->TMPL->fetch_param('delete_text') ?: ee()->lang('delete');
         } else {
             $params['action'] = 'add';
-            $text = ee()->TMPL->fetch_param('add_text') ?: 'add';
+            $text = ee()->TMPL->fetch_param('add_text') ?: ee()->lang('add');
         }
 
         $class = ee()->TMPL->fetch_param('class') ? ' class="' . ee()->TMPL->fetch_param('class') . '"' : '';
