@@ -10,8 +10,24 @@ class Likeopotomus {
     function __construct()
     {
         ee()->lang->loadfile('likeopotomus');
-        $this->member_id = ee()->session->userdata('member_id');
+
+        $settings = $this->get_settings();
+
+        $this->member_id = $settings['auth_token'] ? ee()->config->_global_vars['auth_token'] : ee()->session->userdata('member_id');
         $this->action_id = ee()->functions->fetch_action_id('Likeopotomus', 'init');
+    }
+
+    protected function get_settings()
+    {
+        $results = ee()->db->select('settings')
+            ->from('extensions')
+            ->where('class', 'Likeopotomus_ext')
+            ->limit(1)
+            ->get();
+
+        $settings = unserialize($results->row('settings'));
+
+        return $settings;
     }
 
     /**

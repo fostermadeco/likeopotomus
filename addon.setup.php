@@ -6,5 +6,6 @@ return array(
     'name'        => 'Likeopotomus',
     'description' => 'Provides bookmarking & liking support',
     'version'     => '2.0.0',
-    'namespace'   => 'FM\Likeopotomus'
+    'namespace'   => 'FM\Likeopotomus',
+    'settings_exist' => true
 );
