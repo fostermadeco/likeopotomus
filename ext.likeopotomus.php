@@ -25,6 +25,10 @@ class Likeopotomus_ext {
     {
         $this->settings = $settings;
 
+        if (!array_key_exists('auth_token', $this->settings)) {
+            $this->settings['auth_token'] = '';
+        }
+
         $this->member_id = $this->settings['auth_token'] ? ee()->config->_global_vars['auth_token'] : ee()->session->userdata('member_id');
     }
 

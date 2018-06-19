@@ -13,6 +13,10 @@ class Likeopotomus {
 
         $settings = $this->get_settings();
 
+        if (!array_key_exists('auth_token', $settings)) {
+            $settings['auth_token'] = '';
+        }
+
         $this->member_id = $settings['auth_token'] ? ee()->config->_global_vars['auth_token'] : ee()->session->userdata('member_id');
         $this->action_id = ee()->functions->fetch_action_id('Likeopotomus', 'init');
     }
