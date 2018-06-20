@@ -24,7 +24,7 @@ class Likeopotomus_mcp {
                     'fields' => array(
                         'auth_token' => array(
                             'type' => 'yes_no',
-                            'value' => $settings['auth_token']
+                            'value' => $settings['auth_token'] ?: 'n'
                         )
                     )
                 ),
@@ -48,7 +48,7 @@ class Likeopotomus_mcp {
             'save_btn_text_working' => 'btn_saving'
         );
 
-        return ee('View')->make('ee:_shared/form')->render($vars);
+        return ee('View')->make('likeopotomus:settings')->render($vars);
     }
 
     protected function save()

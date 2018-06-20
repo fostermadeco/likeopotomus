@@ -74,6 +74,11 @@ class Likeopotomus {
             return false;
         }
 
+        // Abort if item does not exist
+        if (!$this->validate($params)) {
+            return false;
+        }
+
         return ee()->db->insert('likeopotomus', $params);
     }
 
@@ -228,5 +233,27 @@ class Likeopotomus {
         return ee()->db->from('likeopotomus')
             ->where($params)
             ->count_all_results();
+    }
+
+    protected function validate($params)
+    {
+        switch ($params['item_type']) {
+            case 'entry':
+                $model_type = 'ChannelEntry';
+                break;
+            default:
+                $model_type = ucfirst($params['item_type']);
+        }
+
+        $builder = ee('Model')->get($model_type)
+            ->filter($params['item_type'] . '_id', $params['item_id']);
+
+        $item = $builder->first();
+
+        if ($item) {
+            return true;
+        }
+
+        return false;
     }
 }
