@@ -6,9 +6,10 @@ class Likeopotomus_mcp {
 
     function index()
     {
+        $vars['alert'] = '';
         if (ee()->input->post('auth_token')) {
             $this->save();
-            $vars['alert'] = ee('CP/Alert')->makeInline('form-standard')
+            $vars['alert'] = ee('CP/Alert')->makeInline('shared-form')
                 ->asSuccess()
                 ->addToBody(lang('settings_saved'))
                 ->now();
