@@ -6,22 +6,49 @@ class Likeopotomus_mcp {
 
     function index()
     {
-        ee()->load->helper('form');
-
-        if ($_POST) {
+        if (ee()->input->post('auth_token')) {
             $this->save();
-            $vars['alert'] = ee('CP/Alert')->makeInline('shared-form')
+            $vars['alert'] = ee('CP/Alert')->makeInline('form-standard')
                 ->asSuccess()
                 ->addToBody(lang('settings_saved'))
-                ->render();
+                ->now();
         }
 
-        $vars = array(
-            'alert' => '',
-            'settings' => $this->get_settings()
+        $settings = $this->get_settings();
+
+        $vars['sections'] = array(
+            array(
+                array(
+                    'title' => 'auth_token',
+                    'desc' => 'auth_token_desc',
+                    'fields' => array(
+                        'auth_token' => array(
+                            'type' => 'yes_no',
+                            'value' => $settings['auth_token']
+                        )
+                    )
+                ),
+                array(
+                    'title' => 'auth_token_name',
+                    'desc' => 'auth_token_name_desc',
+                    'fields' => array(
+                        'auth_token_name' => array(
+                            'type' => 'text',
+                            'value' => $settings['auth_token_name']
+                        )
+                    )
+                )
+            )
         );
 
-        return ee('View')->make('likeopotomus:index')->render($vars);
+        $vars += array(
+            'base_url' => ee('CP/URL', 'addons/settings/likeopotomus'),
+            'cp_page_title' => lang('likeopotomus_module_name'),
+            'save_btn_text' => 'btn_save_settings',
+            'save_btn_text_working' => 'btn_saving'
+        );
+
+        return ee('View')->make('ee:_shared/form')->render($vars);
     }
 
     protected function save()
