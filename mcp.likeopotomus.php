@@ -8,17 +8,29 @@ class Likeopotomus_mcp {
     {
         ee()->load->helper('form');
 
-        $vars = array('settings' => $this->get_settings());
+        if ($_POST) {
+            $this->save();
+            $vars['alert'] = ee('CP/Alert')->makeInline('shared-form')
+                ->asSuccess()
+                ->addToBody(lang('settings_saved'))
+                ->render();
+        }
+
+        $vars = array(
+            'alert' => '',
+            'settings' => $this->get_settings()
+        );
 
         return ee('View')->make('likeopotomus:index')->render($vars);
     }
 
-    function save()
+    protected function save()
     {
         $settings['auth_token'] = ee()->input->post('auth_token') == 'y' ? 'y' : '';
+        $settings['auth_token_name'] = ee()->input->post('auth_token_name');
         $settings = serialize($settings);
 
-        ee()->db->update(
+        $success = ee()->db->update(
             'extensions',
             array(
                 'settings' => $settings,
@@ -28,24 +40,23 @@ class Likeopotomus_mcp {
             )
         );
 
-        $url = ee('CP/URL')->make('addons/settings/likeopotomus');
-
-        return ee()->functions->redirect($url);
+        return $success;
     }
 
     protected function get_settings()
     {
+        $defaults = array(
+            'auth_token' => null,
+            'auth_token_name' => null
+        );
+
         $results = ee()->db->select('settings')
             ->from('extensions')
             ->where('class', 'Likeopotomus_ext')
             ->limit(1)
             ->get();
 
-        $settings = unserialize($results->row('settings'));
-
-        if (!array_key_exists('auth_token', $settings)) {
-            $settings['auth_token'] = null;
-        }
+        $settings = array_merge($defaults, unserialize($results->row('settings')));
 
         return $settings;
     }
