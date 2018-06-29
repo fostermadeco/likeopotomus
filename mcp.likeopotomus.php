@@ -30,12 +30,12 @@ class Likeopotomus_mcp {
                     )
                 ),
                 array(
-                    'title' => 'auth_token_name',
-                    'desc' => 'auth_token_name_desc',
+                    'title' => 'auth_token_path',
+                    'desc' => 'auth_token_path_desc',
                     'fields' => array(
-                        'auth_token_name' => array(
+                        'auth_token_path' => array(
                             'type' => 'text',
-                            'value' => $settings['auth_token_name']
+                            'value' => $settings['auth_token_path']
                         )
                     )
                 )
@@ -55,7 +55,7 @@ class Likeopotomus_mcp {
     protected function save()
     {
         $settings['auth_token'] = ee()->input->post('auth_token') == 'y' ? 'y' : '';
-        $settings['auth_token_name'] = ee()->input->post('auth_token_name');
+        $settings['auth_token_path'] = ee()->input->post('auth_token_path');
         $settings = serialize($settings);
 
         $success = ee()->db->update(
@@ -75,7 +75,7 @@ class Likeopotomus_mcp {
     {
         $defaults = array(
             'auth_token' => null,
-            'auth_token_name' => null
+            'auth_token_path' => null
         );
 
         $results = ee()->db->select('settings')

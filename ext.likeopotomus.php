@@ -29,7 +29,18 @@ class Likeopotomus_ext {
             $this->settings['auth_token'] = '';
         }
 
-        $this->member_id = $this->settings['auth_token'] ? ee()->config->_global_vars[$this->settings['auth_token_name']] : ee()->session->userdata('member_id');
+        $member_id = null;
+        if ($this->settings['auth_token']) {
+            $path = explode(',', $this->settings['auth_token_path']);
+            $member_id = $_SESSION;
+            foreach ($path as $key) {
+                if (is_array($member_id) && array_key_exists($key, $member_id)) {
+                    $member_id = $member_id[$key];
+                }
+            }
+        }
+
+        $this->member_id = is_array($member_id) ? ee()->session->userdata('member_id') : $member_id;
     }
 
     /**
