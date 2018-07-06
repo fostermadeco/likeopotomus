@@ -7,10 +7,10 @@ $lang = array(
     // Settings
     "auth_token" => "Use Auth tokken?",
     "auth_token_desc" => "Enable this if you are using an authentication token over ExpressionEngine's in-built auth methods.",
-    "auth_token_path" => "Auth token path:",
-    "auth_token_path_desc" => "Enter the path where the auth token is stored in the session variable, with each array key separated by a comma.
+    "auth_token_name" => "Auth token name:",
+    "auth_token_name_desc" => "Name of the global variable where the OAuth token is stored in ExpressionEngine.
         <br />
-        For example, if the token is stored in " . '$_SESSION' . "['foo']['bar'] enter 'foo,bar'",
+        eg. 'auth_token' would look at ee()->config->_global_vars['auth_token']",
 
     // Module's tag function default add / delete text
     "add" => "Add",

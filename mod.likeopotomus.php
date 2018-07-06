@@ -23,18 +23,7 @@ class Likeopotomus {
             $settings['auth_token'] = '';
         }
 
-        $member_id = null;
-        if ($settings['auth_token']) {
-            $path = explode(',', $settings['auth_token_path']);
-            $member_id = $_SESSION;
-            foreach ($path as $key) {
-                if (is_array($member_id) && array_key_exists($key, $member_id)) {
-                    $member_id = $member_id[$key];
-                }
-            }
-        }
-
-        $this->member_id = is_array($member_id) ? ee()->session->userdata('member_id') : $member_id;
+        $this->member_id = ee()->config->_global_vars[$settings['auth_token_name']] ?: ee()->session->userdata('member_id');
     }
 
     protected function get_settings()
