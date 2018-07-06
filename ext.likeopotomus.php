@@ -29,7 +29,11 @@ class Likeopotomus_ext {
             $this->settings['auth_token'] = '';
         }
 
-        $this->member_id = ee()->config->_global_vars[$settings['auth_token_name']] ?: ee()->session->userdata('member_id');
+        if ($settings['auth_token'] == 'y') {
+            $this->member_id = ee()->config->_global_vars[$settings['auth_token_name']];
+        } else {
+            $this->member_id = ee()->session->userdata('member_id');
+        }
     }
 
     /**
