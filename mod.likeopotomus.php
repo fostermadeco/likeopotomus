@@ -23,9 +23,12 @@ class Likeopotomus {
             $settings['auth_token'] = '';
         }
 
+        $this->member_id = null;
         if ($settings['auth_token'] == 'y') {
             $this->member_id = ee()->config->_global_vars[$settings['auth_token_name']];
-        } else {
+        }
+
+        if (!$this->member_id) {
             $this->member_id = ee()->session->userdata('member_id');
         }
     }
