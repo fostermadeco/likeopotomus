@@ -30,7 +30,7 @@ class Likeopotomus_ext {
         }
 
         $this->member_id = null;
-        if ($settings['auth_token'] == 'y') {
+        if ($settings['auth_token'] == 'y' && array_key_exists($settings['auth_token_name'], ee()->config->_global_vars)) {
             $this->member_id = ee()->config->_global_vars[$settings['auth_token_name']];
         }
 
