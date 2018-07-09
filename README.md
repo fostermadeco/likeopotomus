@@ -2,6 +2,18 @@
 
 Add-on for Expression Engine to handle bookmarking and liking of content
 
+## Authentication
+
+By default Likeopotomus will use ExpressionEngine's membership IDs for storing and attributing
+bookmarks / likes / etc to a user.
+
+This can be switched over to use a different method of authentication, for example Oauth. To do
+so, go into the Likeopotomus settings and toggle the switch to active, then set the name of the
+global field where the authentication token will be stored.
+
+In the authentication add-on ensure a hook exists which runs on either session_start or session_end
+which then sets the identifier in the global variables.
+
 ## Module - Available Tags
 
 ```

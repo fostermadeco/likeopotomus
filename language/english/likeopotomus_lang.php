@@ -5,7 +5,7 @@ $lang = array(
     "likeopotomus_module_description" => "Provides bookmarking & liking support",
 
     // Settings
-    "auth_token" => "Use Auth tokken?",
+    "auth_token" => "Use Auth token?",
     "auth_token_desc" => "Enable this if you are using an authentication token over ExpressionEngine's in-built auth methods.",
     "auth_token_name" => "Auth token name:",
     "auth_token_name_desc" => "Name of the global variable where the OAuth token is stored in ExpressionEngine.

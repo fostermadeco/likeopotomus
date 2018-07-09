@@ -4,6 +4,11 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Likeopotomus_mcp {
 
+    /**
+     * Main settings page
+     *
+     * @return mixed
+     */
     function index()
     {
         $vars['alert'] = '';
@@ -52,6 +57,11 @@ class Likeopotomus_mcp {
         return ee('View')->make('likeopotomus:settings')->render($vars);
     }
 
+    /**
+     * Saves settings
+     *
+     * @return mixed
+     */
     protected function save()
     {
         $settings['auth_token'] = ee()->input->post('auth_token') == 'y' ? 'y' : '';
@@ -71,6 +81,11 @@ class Likeopotomus_mcp {
         return $success;
     }
 
+    /**
+     * Retrieves settings from database
+     *
+     * @return array
+     */
     protected function get_settings()
     {
         $defaults = array(
